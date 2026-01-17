@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+/* Light Theme */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-tertiary: #64748b;
+  --border-primary: #e2e8f0;
+  --border-secondary: #cbd5e1;
+  --node-bg: #ffffff;
+  --node-border: #e2e8f0;
+  --node-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --bg-primary: #09090b;
+  --bg-secondary: #18181b;
+  --bg-tertiary: #27272a;
+  --text-primary: #fafafa;
+  --text-secondary: #e4e4e7;
+  --text-tertiary: #a1a1aa;
+  --border-primary: #27272a;
+  --border-secondary: #3f3f46;
+  --node-bg: #18181b;
+  --node-border: #27272a;
+  --node-shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Acrylic Theme (Microsoft Fluent Design) */
+[data-theme="acrylic"] {
+  --bg-primary: rgba(9, 9, 11, 0.4);
+  --bg-secondary: rgba(24, 24, 27, 0.6);
+  --bg-tertiary: rgba(39, 39, 42, 0.8);
+  --text-primary: #fafafa;
+  --text-secondary: #e4e4e7;
+  --text-tertiary: #a1a1aa;
+  --border-primary: rgba(39, 39, 42, 0.6);
+  --border-secondary: rgba(63, 63, 70, 0.8);
+  --node-bg: rgba(24, 24, 27, 0.7);
+  --node-border: rgba(39, 39, 42, 0.8);
+  --node-shadow: rgba(0, 0, 0, 0.4);
+}
+
+@theme inline {
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow: hidden; /* Prevent body scroll in app mode */
+}
+
+/* Acrylic effect for acrylic theme */
+[data-theme="acrylic"] body {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(9, 9, 11, 0.4);
+}
+
+[data-theme="acrylic"] .acrylic-card {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(24, 24, 27, 0.7);
+  border: 1px solid rgba(39, 39, 42, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="acrylic"] .acrylic-node {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(24, 24, 27, 0.7);
+  border: 1px solid rgba(39, 39, 42, 0.8);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* React Flow customizations - Theme Aware */
+.react-flow__node {
+  cursor: default;
+}
+
+.react-flow__node:focus {
+  outline: none;
+}
+
+.react-flow__edge-path {
+  stroke: var(--border-secondary);
+  stroke-width: 1.5;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke: var(--text-tertiary);
+}
+
+.react-flow__handle {
+  width: 10px;
+  height: 10px;
+  background: var(--text-tertiary);
+  border: 2px solid var(--bg-secondary);
+}
+
+.react-flow__handle:hover {
+  background: var(--text-secondary);
+  width: 12px;
+  height: 12px;
+}
+
+.react-flow__minimap {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-primary);
+}
+
+.react-flow__controls button {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+  fill: var(--text-tertiary);
+}
+
+.react-flow__controls button:hover {
+  background: var(--bg-tertiary);
+  fill: var(--text-secondary);
+}
+
+/* Custom scrollbar - Theme Aware */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-secondary);
+}
+
+/* Prose customizations for markdown - Theme Aware */
+.prose {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose p {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose strong {
+  color: var(--text-primary);
+}
+
+.prose pre {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.prose code {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  padding: 0.15rem 0.3rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+  font-family: var(--font-mono);
+}
+
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
+.prose a {
+  color: var(--text-tertiary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  color: var(--text-primary);
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--border-secondary);
+  color: var(--text-tertiary);
+  padding-left: 1rem;
+  font-style: italic;
+}
+
+.prose ul, .prose ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.prose li {
+  margin: 0.25rem 0;
+}
+
+.prose hr {
+  border-color: var(--border-primary);
+  margin: 2rem 0;
+}
+
+/* Electron Drag Regions */
+.app-region-drag {
+  -webkit-app-region: drag;
+}
+
+.app-region-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
